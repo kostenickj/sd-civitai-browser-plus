@@ -904,9 +904,11 @@ def get_save_path_and_name(install_path, file_name, api_response, sub_folder=Non
     
     name = os.path.splitext(file_name)[0]
     if not sub_folder:
-        sub_folder = os.path.normpath(os.path.relpath(install_path, gl.main_folder))
+        try:
+            sub_folder = os.path.normpath(os.path.relpath(install_path, gl.main_folder))
+        except:
+            pass
     image_path = _file.get_image_path(install_path, api_response, sub_folder)
-
     if save_to_custom:
         save_path = image_path
     else:
